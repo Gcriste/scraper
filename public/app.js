@@ -122,14 +122,12 @@ $(document).ready(function(){
       }).then(function(data) {
 
         console.log("hello")
-        console.log(data);
   
         
         displayArticles()
   
         $("#scrapeModalLabel").text("You successfully scraped new articles")
-        $("#scrapeModalBody").text("Woohoo!")
-  
+        $("#scrapeModalBody").text("You scraped some articles from NPR")
         $("#scrapeModal").modal("show");
   
       });
