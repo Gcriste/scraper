@@ -30,19 +30,17 @@ $(document).ready(function(){
 
           if (data[i].isSaved){
   
-          //create a delete button
             panelTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-warning delete-button'>" + "Delete Article" + "</button>");
-            // create a note button
             panelTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-success note-button'>" + "Article Notes" + "</button>");
-            // append to the div with id saved-articles (in saved page)
+
             $("#saved-articles").append(panelDiv)
           }
-          // if it is not saved
+   
           else{      
   
-          //create a save button
+   
             panelTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-primary save-button'>" + "Save Article" + "</button>");
-            // append to the div with id articles (in index page)
+
             $("#articles").append(panelDiv)
           
           }

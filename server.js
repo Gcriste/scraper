@@ -18,9 +18,10 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+app.use(express.json());
 app.use(express.static("public"));
 
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraper";
 
 
 mongoose.Promise = Promise;
@@ -28,6 +29,7 @@ mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true
 });
 
+mongoose.connect("mongodb://localhost/scraper", { useNewUrlParser: true });
 
 
 app.get("/", function (req, res) {
@@ -41,68 +43,43 @@ app.get("/saved", function (req, res) {
 
 
 app.get("/scrape", function (req, res) {
-    // app.get("/api/search", (req, res) => {
 
-    //     axios.get("https://www.npr.org/sections/news/").then(response => {
-    //       // console.log("Load Response");
-    //       // Then, we load that into cheerio and save it to $ for a shorthand selector
-    //       let $ = cheerio.load(response.data);
-    
-    //       let handlebarsObject = {
-    //         data: []
-    //       }; // Initialize Empty Object to Store Cheerio Objects
-    
-    //       $("article").each((i, element) => { // Use Cheerio to Search for all Article HTML Tags
-    //         //NPR Only Returns Low Res Images to the Web Scrapper. A little String Manipulation is Done to Get High Res Images
-    //         let lowResImageLink = $(element).children('.item-image').children('.imagewrap').children('a').children('img').attr('src');
-    
-    //         if (lowResImageLink) {
-    
-    //           let imageLength = lowResImageLink.length;
-    //           let highResImage = lowResImageLink.substr(0, imageLength - 11) + "800-c100.jpg";
-    
-    //           handlebarsObject.data.push({ // Store Scrapped Data into handlebarsObject
-    //             headline: $(element).children('.item-info').children('.title').children('a').text(),
-    //             summary: $(element).children('.item-info').children('.teaser').children('a').text(),
-    //             url: $(element).children('.item-info').children('.title').children('a').attr('href'),
-    //             imageURL: highResImage,
-    //             slug: $(element).children('.item-info').children('.slug-wrap').children('.slug').children('a').text(),
-    //             comments: null
-    //           }); // Store HTML Data as an Object within an Object
-    //         } // End of If Else
-    //       }); // End of Article Serch
-    
-    //       // Return Scrapped Data to Handlebars for Rendering
-    //       res.render("index", handlebarsObject);
-    //     });
-    //   });
-    axios.get("https://www.npr.org/sections/news/").then(function (response) {
+
+    axios.get("https://www.npr.org/sections/technology/").then(function (response) {
 
         var $ = cheerio.load(response.data);
-        let counter = 0;
+      
 
-        $("article").each(function (i, element) {
+        $(".item-info").each(function (i, element) {
             var result = {};
-            var storyDiv = $(this).children("div.story-body")
-            result.url = storyDiv.children("a").attr("href")
-            var metaDiv = storyDiv.children("a").children("div.story-meta")
-            result.headline = metaDiv.children("h2").text()
-            result.summary = metaDiv.children("p.summary").text();
+
+            result.headline = $(this).children("h2").text();
+            result.url = $(this).children("a").text("href")
+            result.summary = $(this).children("p.teaser")
+
+            console.log(result.headline)
+            console.log(result.url)
+            console.log( result.summary)
+           
+
+            // var storyDiv = $(this).children("div.story-body")
+            // result.url = storyDiv.children("a").attr("href")
+            // var metaDiv = storyDiv.children("a").children("div.story-meta")
+            // result.headline = metaDiv.children("h2").text()
+            // result.summary = metaDiv.children("p.summary").text();
 
 
-            if (result.headline && result.url) {
+            // if (result.headline && result.url) {
                 db.Article.create(result)
                     .then(function (dbArticle) {
                         console.log(dbArticle);
-                        counter++;
-                        console.log("added " + counter + " new items")
                     })
                     .catch(function (err) {
                         return res.json(err);
                     });
                 console.log(result)
 
-            }
+            
 
 
         });
