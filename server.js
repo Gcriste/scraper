@@ -54,22 +54,11 @@ app.get("/scrape", function (req, res) {
             var result = {};
 
             result.headline = $(this).children("h2").text();
-            result.url = $(this).children("a").text("href")
-            result.summary = $(this).children("p.teaser")
-
-            console.log(result.headline)
-            console.log(result.url)
-            console.log( result.summary)
-           
-
-            // var storyDiv = $(this).children("div.story-body")
-            // result.url = storyDiv.children("a").attr("href")
-            // var metaDiv = storyDiv.children("a").children("div.story-meta")
-            // result.headline = metaDiv.children("h2").text()
-            // result.summary = metaDiv.children("p.summary").text();
+            result.url =  $(element).find("a").attr("href");
+            result.summary = $(this).children("p.teaser").text()
 
 
-            // if (result.headline && result.url) {
+            if (result.headline && result.url) {
                 db.Article.create(result)
                     .then(function (dbArticle) {
                         console.log(dbArticle);
@@ -79,7 +68,7 @@ app.get("/scrape", function (req, res) {
                     });
                 console.log(result)
 
-            
+                }
 
 
         });
