@@ -1,7 +1,6 @@
 $(document).ready(function(){
 
 
-
     function displayArticles(){
       $.getJSON("/articles", function(data) {
 
