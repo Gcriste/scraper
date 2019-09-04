@@ -41,7 +41,41 @@ app.get("/saved", function (req, res) {
 
 
 app.get("/scrape", function (req, res) {
+    // app.get("/api/search", (req, res) => {
 
+    //     axios.get("https://www.npr.org/sections/news/").then(response => {
+    //       // console.log("Load Response");
+    //       // Then, we load that into cheerio and save it to $ for a shorthand selector
+    //       let $ = cheerio.load(response.data);
+    
+    //       let handlebarsObject = {
+    //         data: []
+    //       }; // Initialize Empty Object to Store Cheerio Objects
+    
+    //       $("article").each((i, element) => { // Use Cheerio to Search for all Article HTML Tags
+    //         //NPR Only Returns Low Res Images to the Web Scrapper. A little String Manipulation is Done to Get High Res Images
+    //         let lowResImageLink = $(element).children('.item-image').children('.imagewrap').children('a').children('img').attr('src');
+    
+    //         if (lowResImageLink) {
+    
+    //           let imageLength = lowResImageLink.length;
+    //           let highResImage = lowResImageLink.substr(0, imageLength - 11) + "800-c100.jpg";
+    
+    //           handlebarsObject.data.push({ // Store Scrapped Data into handlebarsObject
+    //             headline: $(element).children('.item-info').children('.title').children('a').text(),
+    //             summary: $(element).children('.item-info').children('.teaser').children('a').text(),
+    //             url: $(element).children('.item-info').children('.title').children('a').attr('href'),
+    //             imageURL: highResImage,
+    //             slug: $(element).children('.item-info').children('.slug-wrap').children('.slug').children('a').text(),
+    //             comments: null
+    //           }); // Store HTML Data as an Object within an Object
+    //         } // End of If Else
+    //       }); // End of Article Serch
+    
+    //       // Return Scrapped Data to Handlebars for Rendering
+    //       res.render("index", handlebarsObject);
+    //     });
+    //   });
     axios.get("https://www.npr.org/sections/news/").then(function (response) {
 
         var $ = cheerio.load(response.data);
