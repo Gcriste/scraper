@@ -6,13 +6,13 @@ $(document).ready(function(){
 
         for (var i = 0; i < data.length; i++) {
   
-          var panelDiv = $("<div>")
-          panelDiv.attr("id", data[i]._id)
-          panelDiv.addClass("panel panel-default")
+          var newDiv = $("<div>")
+          newDiv.attr("id", data[i]._id)
+          newDiv.addClass("panel panel-default")
   
-          var panelHeading = $("<div class='panel-heading' ></div>")
+          var newHeading = $("<div class='panel-heading' ></div>")
   
-          var panelTitle = $("<h3 class='panel-title' ></h3>")
+          var newTitle = $("<h3 class='panel-title' ></h3>")
           
           
           var newATag = $("<a class='article-title'>");
@@ -20,27 +20,27 @@ $(document).ready(function(){
           newATag.attr("href", data[i].url)
           newATag.text(data[i].headline)
   
-          panelTitle.append(newATag)
-          panelHeading.append(panelTitle)
-          panelDiv.append(panelHeading)
+          newTitle.append(newATag)
+          newHeading.append(newTitle)
+          newDiv.append(newHeading)
   
-          panelDiv.append(data[i].summary)
+          newDiv.append(data[i].summary)
         
 
           if (data[i].isSaved){
   
-            panelTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-warning delete-button'>" + "Delete Article" + "</button>");
-            panelTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-success note-button'>" + "Article Notes" + "</button>");
+            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-warning delete-button'>" + "Delete Article" + "</button>");
+            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-success note-button'>" + "Article Notes" + "</button>");
 
-            $("#saved-articles").append(panelDiv)
+            $("#saved-articles").append(newDiv)
           }
    
           else{      
   
    
-            panelTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-primary save-button'>" + "Save Article" + "</button>");
+            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-primary save-button'>" + "Save Article" + "</button>");
 
-            $("#articles").append(panelDiv)
+            $("#articles").append(newDiv)
           
           }
   

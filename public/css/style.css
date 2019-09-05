@@ -1,0 +1,19 @@
+button{
+    border-radius:5px;
+    margin:10px;
+    padding:10px;
+
+}
+/* 
+button:hover{
+fontsize
+} */
+
+body{
+    background-color:black;
+    font-family: 'Gayathri', sans-serif;
+}
+
+h1,h2{
+    color:white;
+}
