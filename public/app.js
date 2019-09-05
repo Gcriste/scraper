@@ -29,8 +29,8 @@ $(document).ready(function(){
 
           if (data[i].isSaved){
   
-            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-warning delete-button'>" + "Delete Article" + "</button>");
-            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-success note-button'>" + "Article Notes" + "</button>");
+            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-info delete-button'>" + "Delete Article" + "</button>");
+            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-primary note-button'>" + "Article Notes" + "</button>");
 
             $("#saved-articles").append(newDiv)
           }
@@ -38,7 +38,7 @@ $(document).ready(function(){
           else{      
   
    
-            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-primary save-button'>" + "Save Article" + "</button>");
+            newTitle.append("<button data-id='" + data[i]._id + "' class='btn btn-success save-button'>" + "Save Article" + "</button>");
 
             $("#articles").append(newDiv)
           
