@@ -6,16 +6,13 @@ var ArticleSchema = new Schema({
   headline: {
     type: String,
     unique: true
-
   },
 
   summary: {
     type: String
-    
   },
   url: {
     type: String
- 
   },
 
   isSaved: {
