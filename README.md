@@ -1,6 +1,6 @@
-# scraper
+# NPR Scraper
 
-## Deployable link: https://griffinscraper.herokuapp.com/
+### Deployable link: https://griffinscraper.herokuapp.com/
 
 ### This app allows a user to scrape the NPR website and save articles to the database
 
